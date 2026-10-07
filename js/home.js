@@ -79,38 +79,98 @@ function createShootingStar() {
 
 // ---------------------------------------------------------------
 
-const text = "??????";
-const typingSpeed = 150;
-let charIndex = 0;
-
-function typeWriter() {
-  const typingDiv = document.getElementById('typingEffect');
-  if (charIndex < text.length) {
-    typingDiv.innerHTML += text.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeWriter, typingSpeed);
-  }
-}
-
 // ---------------------------------------------------------------
 
-const swiper = new Swiper('.swiper', {
-    direction: 'horizontal',
-    loop: true,
-  
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  
-    autoplay: {
-      delay: 2250,
-    },
-  
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
+const hostSwiperElement = document.querySelector('#hosts .swiper');
+
+if (typeof Swiper === 'undefined') {
+    console.error('Swiper failed to load; the host carousel is unavailable.');
+} else if (!hostSwiperElement) {
+    console.error('Host carousel element was not found.');
+} else {
+    new Swiper(hostSwiperElement, {
+        direction: 'horizontal',
+        loop: true,
+
+        pagination: {
+          el: hostSwiperElement.querySelector('.swiper-pagination'),
+        },
+
+        autoplay: {
+          delay: 2250,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+
+        navigation: {
+          nextEl: hostSwiperElement.querySelector('.swiper-button-next'),
+          prevEl: hostSwiperElement.querySelector('.swiper-button-prev'),
+        },
+    });
+}
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const testimonialCarousel = document.querySelector('#reviews .testimCarousel');
+const testimonialSlides = [...document.querySelectorAll('#reviews .reviewSlide')];
+const testimonialDots = [...document.querySelectorAll('#reviews .reviewDot')];
+const previousReviewButton = document.querySelector('#reviews .reviewPrevious');
+const nextReviewButton = document.querySelector('#reviews .reviewNext');
+
+if (!testimonialCarousel || !previousReviewButton || !nextReviewButton ||
+    testimonialSlides.length === 0 || testimonialDots.length !== testimonialSlides.length) {
+    console.error('Customer review carousel is missing slides or controls.');
+} else {
+    let currentReview = 0;
+    let rotationTimer;
+
+    function showReview(index) {
+        currentReview = (index + testimonialSlides.length) % testimonialSlides.length;
+        testimonialSlides.forEach((slide, slideIndex) => {
+            const isActive = slideIndex === currentReview;
+            slide.hidden = !isActive;
+            slide.setAttribute('aria-hidden', String(!isActive));
+            testimonialDots[slideIndex].setAttribute('aria-current', String(isActive));
+        });
+    }
+
+    function stopReviewRotation() {
+        window.clearInterval(rotationTimer);
+        rotationTimer = undefined;
+    }
+
+    function startReviewRotation() {
+        if (prefersReducedMotion || rotationTimer || testimonialSlides.length < 2) {
+            return;
+        }
+
+        rotationTimer = window.setInterval(() => showReview(currentReview + 1), 5000);
+    }
+
+    previousReviewButton.addEventListener('click', () => showReview(currentReview - 1));
+    nextReviewButton.addEventListener('click', () => showReview(currentReview + 1));
+    testimonialDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showReview(index));
+    });
+
+    testimonialCarousel.addEventListener('mouseenter', stopReviewRotation);
+    testimonialCarousel.addEventListener('mouseleave', startReviewRotation);
+    testimonialCarousel.addEventListener('focusin', stopReviewRotation);
+    testimonialCarousel.addEventListener('focusout', event => {
+        if (!testimonialCarousel.contains(event.relatedTarget)) {
+            startReviewRotation();
+        }
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopReviewRotation();
+        } else {
+            startReviewRotation();
+        }
+    });
+
+    showReview(currentReview);
+    startReviewRotation();
+}
 
 // ---------------------------------------------------------------
 

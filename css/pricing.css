@@ -536,3 +536,226 @@
         margin-bottom: 1rem;
     }
 }
+
+/* Modern shared visual treatment */
+#plans,
+#features,
+#moreInfo {
+    color: var(--text);
+    font-family: "Urbanist", "Roboto", sans-serif;
+}
+
+#plans > .comeUp:first-child {
+    box-sizing: border-box;
+    width: min(900px, calc(100% - 48px));
+    margin: 0 auto;
+    text-align: center;
+}
+
+#plans .plansTitle {
+    font-family: "Poppins", "Urbanist", sans-serif;
+    font-weight: 700;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+}
+
+#plans h1.plansTitle {
+    margin-bottom: 16px;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.08;
+}
+
+#plans h2.plansTitle {
+    margin-top: 0;
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    line-height: 1.15;
+}
+
+#plans .subTitle {
+    display: block;
+    max-width: 620px;
+    margin: 18px auto 0;
+    color: var(--subTxt);
+    font-family: "Urbanist", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.plansParent {
+    margin-top: 3.5rem;
+}
+
+.plansChild,
+.plansBaby {
+    align-items: stretch;
+}
+
+.plan {
+    box-sizing: border-box;
+    width: 17rem;
+    min-height: 23rem;
+    height: auto;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--orbit);
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .065), rgba(255, 255, 255, .018));
+    box-shadow: 0 20px 48px rgba(3, 7, 31, .14);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.plan::before,
+.plan::after {
+    display: none;
+}
+
+.plan:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 217, 131, .48);
+    box-shadow: 0 26px 58px rgba(3, 7, 31, .22);
+}
+
+.plan > h4 {
+    color: var(--moon);
+    font-family: "Poppins", "Urbanist", sans-serif;
+    font-size: .82rem;
+    letter-spacing: .1em;
+}
+
+.plan > h2 {
+    font-weight: 700;
+    letter-spacing: -.04em;
+}
+
+.plan > h2 > i,
+.plan > p > i {
+    color: var(--moon);
+}
+
+.plan > p {
+    color: var(--subTxt);
+    font-family: "Urbanist", sans-serif;
+    font-size: .98rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.planBttnWrap {
+    margin-top: auto;
+}
+
+.planBttn {
+    box-sizing: border-box;
+    min-height: 46px;
+    padding: .6rem 1rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--moon), #ffe7a9);
+    box-shadow: 0 8px 22px rgba(255, 217, 131, .18);
+    color: #211a10;
+    font-family: "Urbanist", "Poppins", sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: .045em;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.planBttn:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+    color: #211a10;
+    box-shadow: 0 12px 28px rgba(255, 217, 131, .28);
+    filter: brightness(1.04);
+}
+
+.planBttn:focus-visible,
+#moreInfo .moonBttn:focus-visible {
+    outline: 3px solid var(--moon);
+    outline-offset: 4px;
+}
+
+.feature {
+    border: 1px solid var(--orbit);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .065), rgba(255, 255, 255, .018));
+    box-shadow: 0 20px 48px rgba(3, 7, 31, .14);
+    color: var(--text);
+}
+
+.feature > p1 {
+    color: var(--subTxt);
+    font-family: "Urbanist", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+#moreInfo .bottomMoon > h2 {
+    font-family: "Urbanist", "Poppins", sans-serif;
+    font-weight: 800;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+}
+
+#moreInfo .bttn.moonBttn {
+    width: auto;
+    min-height: 48px;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(43, 22, 22, .18);
+    background: var(--moonDark);
+    box-shadow: 0 8px 24px rgba(43, 22, 22, .2);
+    color: #fff;
+    text-decoration: none;
+}
+
+#moreInfo .bttn.moonBttn::before,
+#moreInfo .bttn.moonBttn::after {
+    display: none;
+}
+
+#moreInfo .bttn.moonBttn:hover {
+    transform: translateY(-2px);
+    background: #3b2020;
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    #plans > .comeUp:first-child {
+        width: calc(100% - 36px);
+    }
+
+    #plans h1.plansTitle {
+        font-size: clamp(2rem, 9vw, 2.65rem);
+        line-height: 1.08;
+    }
+
+    #plans h2.plansTitle {
+        font-size: clamp(1.45rem, 6vw, 1.8rem);
+        line-height: 1.2;
+    }
+
+    .plansParent {
+        margin-top: 2.5rem;
+    }
+
+    .plan {
+        width: min(17rem, calc(100vw - 40px));
+        min-height: 22rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .plan,
+    .planBttn,
+    #moreInfo .bttn.moonBttn {
+        transition: none !important;
+    }
+
+    .plan:hover,
+    .planBttn:hover,
+    #moreInfo .bttn.moonBttn:hover {
+        transform: none;
+    }
+}
