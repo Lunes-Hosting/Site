@@ -1,33 +1,50 @@
 @import url(colors.css);
 
 #btt {
-    display: none; 
-    position: fixed; 
-    bottom: 40px; 
-    right: 14.5px; 
-    z-index: 99; 
-    border: none; 
-    outline: none; 
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99;
+    border: 1px solid rgba(255, 255, 255, .18);
+    outline: none;
     color: var(--bttIn1);
-    background-color: var(--bttOut1); 
-    cursor: pointer; 
-    border-radius: 40px; 
-    font-size: 18px; 
-    width: 70px; 
-    height: 70px;
+    background-color: var(--bttOut1);
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 52px;
+    height: 52px;
     text-align: center;
     user-select: none;
-    transition-duration: 0.4s;
-  }
-  
-  #btt:hover {
-    color: var(--bttIn2); 
-    background-color: var(--bttOut2); 
-    /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
-  }
-  
-  .bttIcon {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+    backdrop-filter: blur(12px);
+    transition: color .2s ease, background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+#btt:hover {
+    color: var(--bttIn2);
+    background-color: var(--bttOut2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+}
+
+#btt:focus-visible {
+    outline: 3px solid var(--moon);
+    outline-offset: 4px;
+}
+
+.bttIcon {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
+@media (max-width: 700px) {
+    #btt {
+        width: 46px;
+        height: 46px;
+        right: 16px;
+        bottom: 16px;
+    }
+}

@@ -4,16 +4,11 @@ const navbar = document.getElementById('navbar');
 const revealElements = document.querySelectorAll('.reveal');
 
 window.addEventListener('scroll', () => {
-  window.addEventListener('scroll', () => {
   for (const element of revealElements) {
     if (element.getBoundingClientRect().top < window.innerHeight - 300) {
-      if (!element.classList.contains("active")) {
-        element.classList.add("active");
-        typeWriter();
-      }
+      element.classList.add("active");
     }
   }
-});
   // when they scroll down 20px from the top
   if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
       backToTopButton.style.display = "block";
